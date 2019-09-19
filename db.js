@@ -53,9 +53,9 @@ const syncAndSeed = async ()=>{
   await conn.sync({force: true});
 
   const products = [
-    {name: 'tacos', suggestedPrice: 4 },
-    {name: 'burritos', suggestedPrice: 8 },
-    {name: 'tres leches', suggestedPrice: 3.5 }
+    {name: 'Tacos', suggestedPrice: 4 },
+    {name: 'Burritos', suggestedPrice: 8 },
+    {name: 'Tres Leches', suggestedPrice: 3.5 }
   ]
 
   const [tacos, burritos, tresLeches ] =  await mapPromise(products, Product);

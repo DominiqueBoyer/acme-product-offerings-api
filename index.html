@@ -64,7 +64,7 @@
                 Offering:
                 <ul>
                   {
-                    company.offered.map( offer => <li key={ offer.id }> { offer.product.name } at { offer.price } (suggestedPrice: { offer.product.suggestedPrice })</li>)
+                    company.offered.map( offer => <li key={ offer.id }> { offer.product.name } at ${ (offer.price *1).toFixed(2)} (suggestedPrice: ${ (offer.product.suggestedPrice * 1).toFixed(2) })</li>)
                   }
                 </ul>
               </li>)
@@ -82,12 +82,12 @@
           <ul>
             {
               processed.map( product => <li key={ product.id }>
-                <h2>{ product.name }</h2> ${ product.suggestedPrice }
+                <h2>{ product.name }</h2> ${ (product.suggestedPrice* 1).toFixed(2) }
                 <div>{ product.description }</div>
                 Offered By: { product.offered.length}
                 <ul>
                   {
-                    product.offered.map( offer => <li key={ offer.id }> { offer.company.name } at { offer.price }</li>)
+                    product.offered.map( offer => <li key={ offer.id }> { offer.company.name } at ${ (offer.price*1).toFixed(2) }</li>)
                   }
                 </ul>
               </li>)
