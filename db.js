@@ -76,4 +76,12 @@ const syncAndSeed = async ()=>{
   await mapPromise(offerings, Offering);
 }
 
-syncAndSeed();
+module.exports = {
+  syncAndSeed,
+  models: {
+    Product,
+    Company,
+    Offering
+  }
+};
+
