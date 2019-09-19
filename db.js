@@ -32,6 +32,11 @@ const Company = conn.define('company', {
 });
 
 const Offering = conn.define('offering', {
+  id:{
+    type: UUID,
+    primaryKey: true,
+    defaultValue: UUIDV4
+  },
   price: {
     type: DECIMAL
   }
@@ -40,13 +45,35 @@ const Offering = conn.define('offering', {
 Offering.belongsTo(Company);
 Offering.belongsTo(Product);
 
+const mapPromise = (items, model)=>{
+  return Promise.all(items.map(item => model.create(item)));
+}
 
 const syncAndSeed = async ()=>{
   await conn.sync({force: true});
 
-  const
+  const products = [
+    {name: 'tacos', suggestedPrice: 4 },
+    {name: 'burritos', suggestedPrice: 8 },
+    {name: 'tres leches', suggestedPrice: 3.5 }
+  ]
 
+  const [tacos, burritos, tresLeches ] =  await mapPromise(products, Product);
 
+  const companies = [
+    {name: 'Albertos' },
+    {name: 'Chipotle' },
+    {name: 'Taco Bell' }
+  ]
+
+  const [ albertos, chipotle, tacoBell ]  = await mapPromise(companies, Company);
+
+  const offerings = [
+    {price: 2, companyId: tacoBell.id, productId: tacos.id },
+    {price: 8.5, companyId: chipotle.id, productId: burritos.id},
+    {price: 3, companyId: albertos.id, productId: tresLeches.id }
+  ]
+  await mapPromise(offerings, Offering);
 }
 
 syncAndSeed();
