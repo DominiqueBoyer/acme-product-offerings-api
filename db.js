@@ -14,7 +14,7 @@ const Product = conn.define('product', {
     type: STRING,
     unique: true
   },
-  suggestPrice: {
+  suggestedPrice: {
     type: DECIMAL
   }
 });

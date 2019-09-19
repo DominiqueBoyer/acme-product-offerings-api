@@ -1,8 +1,9 @@
 const express = require('express');
-const { syncAndSeed, models } = require('./db');
-const { Product, Company, Offering } = models;
+const { syncAndSeed } = require('./db');
 
 const app = express();
+
+app.use('/api', require('./api'));
 
 syncAndSeed()
   .then(() => {
